@@ -49,3 +49,33 @@ describe('Todo save method', () => {
         expect(response.success).toBe(true)
     })
 })
+
+describe('Todo get method', () => {
+    test('Should be able to retrieve from database', async () => {
+        const data = {
+            title: 'Test todo'
+
+        }
+        const todo = new Todo(data)
+        const response = await todo.save()
+        expect(response.success).toBe(true)
+
+        const {success, error, data: returnedTodo} = await Todo.get(data)
+        expect(success).toBe(true)
+        expect(error).toBe(null)
+        expect(returnedTodo).toBeInstanceOf(Todo)
+        expect(returnedTodo?.title).toEqual(todo.title)
+
+    })
+
+    test('Should return error if todo not found', async () => {
+        const data = {
+            title: 'Test todo'
+
+        }
+        const {success, error, data: returnedTodo} = await Todo.get(data)
+        expect(success).toBe(false)
+        expect(error).toEqual(Error('No todo of that value found'))
+        expect(returnedTodo).toBe(undefined)
+    })
+})

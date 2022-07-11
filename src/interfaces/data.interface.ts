@@ -1,3 +1,5 @@
+import { Todo } from "../models/todo.model"
+
 export interface Data {
   title: string
   is_completed?: boolean
@@ -8,4 +10,5 @@ export interface Data {
 export interface Response {
   success: boolean
   error: Error | unknown
+  data?: Todo
 }

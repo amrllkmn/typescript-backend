@@ -22,4 +22,18 @@ export class Todo {
     }
     
    }
+
+   static async get(data:Data) : Promise<Response> {
+    try {
+        const todo = await knex('todos').where(data).first()
+        if (!todo) {
+
+            return { success: false, error: Error('No todo of that value found')}
+        }
+
+        return { success: true, error: null, data: new Todo(todo)}
+    } catch (error) {
+        return { success: false, error: error }
+    }
+}
 }

@@ -8,7 +8,7 @@
 		"build": "npx tsc",
 		"start": "env-cmd --file .env.local node dist/index.js",
 		"dev": "concurrently \"npx tsc --watch\" \"env-cmd --file .env.local nodemon -q dist/index.js\"",
-		"knex:migrate": "env-cmd --file .env.local npx knex migrate:latest"
+		"knex:migrate": "env-cmd --file .env.local npx knex migrate:latest --knexfile ./dist/knexfile.js"
 	},
 	"author": "Amirul Lokman",
 	"license": "ISC",

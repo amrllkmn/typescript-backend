@@ -1,5 +1,5 @@
-import { Data } from "../interfaces/data.interface";
-
+import { Data, Response } from "../interfaces/data.interface";
+import knex from '../configs/knex'
 export class Todo {
     title: string;
     is_completed: boolean
@@ -12,4 +12,14 @@ export class Todo {
         this.updated_at = data.updated_at
         this.is_completed = data.is_completed ? data.is_completed : false
     }
+
+   async save() : Promise<Response>{
+    try {
+        await knex('todos').insert(this)
+        return {success: true, error: undefined}
+    } catch (error) {
+        return {success: false, error}
+    }
+    
+   }
 }

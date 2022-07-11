@@ -1,7 +1,7 @@
 import type { Knex } from "knex";
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config({})
 
 const { DB_USERNAME, DB_USER_PASSWORD, DB_HOST, DB_NAME } = process.env
 
